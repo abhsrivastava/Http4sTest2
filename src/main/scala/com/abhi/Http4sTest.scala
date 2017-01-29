@@ -5,19 +5,19 @@ package com.abhi
   */
 
 import org.http4s.client.blaze.SimpleHttp1Client
-import org.http4s.Status.ResponseClass.Successful
-import io.circe.syntax._
 import org.http4s._
 import org.http4s.headers._
 import org.http4s.circe._
-import scalaz.concurrent.Task
-import io.circe._
 
-final case class Login(username: String, password: String)
-final case class Token(token: String)
+import scalaz.concurrent.Task
+import io.circe.syntax._
+import io.circe.generic.auto._
+import org.http4s.Status.ResponseClass.Successful
+
+case class Login(username: String, password: String)
+case class Token(token: String)
 
 object JsonHelpers {
-   import io.circe.generic.auto._
    implicit val loginEntityEncoder : EntityEncoder[Login] = jsonEncoderOf[Login]
    implicit val loginEntityDecoder : EntityDecoder[Login] = jsonOf[Login]
    implicit val tokenEntityEncoder: EntityEncoder[Token] = jsonEncoderOf[Token]
