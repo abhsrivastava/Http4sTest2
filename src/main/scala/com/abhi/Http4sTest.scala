@@ -18,10 +18,6 @@ final case class Token(token: String)
 
 object JsonHelpers {
    import io.circe.generic.auto._
-   implicit val tokenDecoder : Decoder[Token] = Decoder.forProduct1("token")(Token.apply)
-   implicit val tokenEncoder : Encoder[Token] = Encoder.forProduct1("token")(u => u.token)
-   implicit val loginDecoder : Decoder[Login] = Decoder.forProduct2("username", "password")(Login.apply)
-   implicit val loginEncoder : Encoder[Login] = Encoder.forProduct2("username", "password")(u => (u.username, u.password))
    implicit val loginEntityEncoder : EntityEncoder[Login] = jsonEncoderOf[Login]
    implicit val loginEntityDecoder : EntityDecoder[Login] = jsonOf[Login]
    implicit val tokenEntityEncoder: EntityEncoder[Token] = jsonEncoderOf[Token]
